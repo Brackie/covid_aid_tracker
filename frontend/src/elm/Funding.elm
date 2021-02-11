@@ -17,14 +17,14 @@ type alias Funding =
 
 
 type Msg
-    = GotFundingData (Result Http.Error Funding)
+    = GotFundingData (Result Http.Error (List Funding))
 
 
 getFundingData : Cmd Msg
 getFundingData =
     Http.get
         { url = "https://actionfortransparency.org/wp-content/plugins/a4t-covid-19/assets/funding.json"
-        , expect = Http.expectJson GotFundingData fundingDecoder
+        , expect = Http.expectJson GotFundingData (list fundingDecoder)
         }
 
 
