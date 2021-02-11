@@ -17,19 +17,24 @@ type alias Funding =
 
 
 type Msg
-    = GotFundingData (Result Http.Error (List Funding))
+    = GotFundingData (Result Http.Error String)
 
 
 getFundingData : Cmd Msg
 getFundingData =
     Http.get
         { url = "https://actionfortransparency.org/wp-content/plugins/a4t-covid-19/assets/funding.json"
-        , expect = Http.expectJson GotFundingData (list fundingDecoder)
+        , expect = Http.expectString GotFundingData
         }
 
 
 
 -- helpers
+
+
+cleanJson : String -> String
+cleanJson invalidJson =
+    String.replace "'" "\"" invalidJson
 
 
 inKindDonation : Funding -> Bool
@@ -51,11 +56,13 @@ countiesDecoder =
     list string
 
 
-fundingDecoder : Decoder Funding
+fundingDecoder : Decoder (List Funding)
 fundingDecoder =
-    Decode.succeed Funding
-        |> required "amount" amountDecoder
-        |> required "donor" string
-        |> required "recepient" string
-        |> required "counties" countiesDecoder
-        |> required "date" Iso8601.decoder
+    list <|
+        (Decode.succeed Funding
+            |> required "amount" amountDecoder
+            |> required "donor" string
+            |> required "recepient" string
+            |> required "counties" countiesDecoder
+            |> required "date" Iso8601.decoder
+        )
