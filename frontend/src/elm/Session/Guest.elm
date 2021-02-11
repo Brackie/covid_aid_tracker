@@ -30,8 +30,6 @@ init shared =
 
 type alias Model =
     { shared : Shared
-    , afterLoginRedirect : Maybe Route
-    , profile : Maybe Profile
     , showNav : Bool
     }
 
@@ -39,8 +37,6 @@ type alias Model =
 initModel : Shared -> Model
 initModel shared =
     { shared = shared
-    , afterLoginRedirect = Nothing
-    , profile = Nothing
     , showNav = False
     }
 
@@ -136,8 +132,8 @@ update msg ({ shared } as model) =
 
 
 addAfterLoginRedirect : Route -> Model -> Model
-addAfterLoginRedirect route model =
-    { model | afterLoginRedirect = Just route }
+addAfterLoginRedirect _ model =
+    model
 
 
 msgToString : Msg -> List String

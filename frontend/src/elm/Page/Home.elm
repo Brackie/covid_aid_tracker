@@ -54,6 +54,10 @@ view shared model =
     }
 
 
+visualize : Model -> Html Msg
+visualize model =
+    div [][]
+
 -- UPDATE
 
 
