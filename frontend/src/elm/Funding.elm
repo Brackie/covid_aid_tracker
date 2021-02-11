@@ -58,4 +58,4 @@ fundingDecoder =
         |> required "donor" string
         |> required "recepient" string
         |> required "counties" countiesDecoder
-        |> required "period" Iso8601.decoder
+        |> required "date" Iso8601.decoder
