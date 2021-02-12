@@ -9,6 +9,8 @@ import Route exposing (Route(..), replaceUrl)
 import Session.Shared as Shared exposing (Shared)
 import Time
 import UpdateResult as UR
+import Visualize.Barchart
+import Visualize.Linechart
 
 
 
@@ -17,6 +19,16 @@ import UpdateResult as UR
 
 type alias Model =
     {
+        data : List ()
+    }
+
+
+type Insight = CountyGovtFunding
+        | NationalGovtFunding
+        | TotalFunding
+
+type alias Config = {
+        insight : Insight
     }
 
 type alias SharedModel m =
@@ -28,6 +40,7 @@ init shared =
     let
         initModel =
             {
+                data = []
             }
     in
     ( initModel

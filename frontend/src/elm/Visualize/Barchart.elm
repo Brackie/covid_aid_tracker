@@ -8,7 +8,7 @@ import TypedSvg.Attributes exposing (class, textAnchor, transform, viewBox)
 import TypedSvg.Attributes.InPx exposing (height, width, x, y)
 import TypedSvg.Core exposing (Svg, text)
 import TypedSvg.Types exposing (AnchorAlignment(..), Transform(..))
-import Visualize exposing (h, w, padding)
+import Visualize.Visualize exposing (h, w, padding)
 
 xScale : List ( a, Float ) -> BandScale a
 xScale model =
